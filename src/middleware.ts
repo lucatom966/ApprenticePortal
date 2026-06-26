@@ -4,20 +4,17 @@ import type { Role } from "@/types";
 
 const { auth } = NextAuth(authConfig);
 
-const ROLE_ROUTES: { pattern: RegExp; allow: Role[] }[] = [
-  { pattern: /^\/admin/, allow: ["admin", "gbv"] },
-  { pattern: /^\/teams\/[^/]+\/edit/, allow: ["admin", "gbv", "praxisbildner"] },
-];
+// Only /admin/* needs a hard role-gate at middleware level.
+// All other access differences are handled via show/hide buttons on the same pages.
+const ADMIN_ONLY: Role[] = ["admin", "gbv"];
 
 export default auth((req) => {
   const { nextUrl, auth: session } = req;
   const role = session?.user?.role as Role | undefined;
 
-  for (const { pattern, allow } of ROLE_ROUTES) {
-    if (pattern.test(nextUrl.pathname)) {
-      if (!role || !allow.includes(role)) {
-        return Response.redirect(new URL("/unauthorized", nextUrl));
-      }
+  if (/^\/admin/.test(nextUrl.pathname)) {
+    if (!role || !ADMIN_ONLY.includes(role)) {
+      return Response.redirect(new URL("/dashboard", nextUrl));
     }
   }
 });

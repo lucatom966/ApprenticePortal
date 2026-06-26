@@ -22,36 +22,28 @@ export default async function TeamPage({ params }: { params: Promise<{ teamId: s
   const role = session.user.role;
   const userTeamId = session.user.teamId;
   const isManager = role === "gbv" || role === "admin";
-  const isTrainer = role === "praxisbildner";
-  const isLernender = role === "lernender";
-
-  // Praxisbildner darf nur den eigenen Onepager sehen
-  if (isTrainer && userTeamId !== teamId) redirect("/unauthorized");
+  const canEdit = isManager || (role === "praxisbildner" && userTeamId === teamId);
+  const canApply = role === "lernender";
 
   const active = isTeamActive(teamId);
   const deactivatedUntil = getDeactivatedUntil(teamId);
-
-  // Lernende sehen deaktivierte Onepager nicht
-  if (!active && isLernender) redirect("/teams");
-
-  const canEdit = isManager || (isTrainer && userTeamId === teamId);
 
   const mailtoLink = `mailto:${team.trainerEmail}?cc=${team.gbvEmail}&subject=Stage-Anfrage%3A%20${encodeURIComponent(team.name)}&body=Guten%20Tag%20${encodeURIComponent(team.trainerName)}%2C%0A%0AIch%20interessiere%20mich%20f%C3%BCr%20eine%20Stage%20im%20Team%20${encodeURIComponent(team.name)}.%0A%0AFreundliche%20Gr%C3%BCsse`;
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
       {/* Top bar */}
       <div className="flex items-center justify-between mb-8 gap-3 flex-wrap">
         <Link
-          href={isTrainer ? "/dashboard" : "/teams"}
+          href="/teams"
           className="inline-flex items-center gap-1.5 text-sm text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] transition-colors"
         >
           <ArrowLeft size={14} />
-          {isTrainer ? "Dashboard" : "Zurück zu Teams"}
+          Zurück zu Teams
         </Link>
 
         <div className="flex items-center gap-2">
-          {/* GBV / Admin: deactivate toggle */}
           {isManager && (
             <DeactivateToggle
               teamId={teamId}
@@ -60,7 +52,6 @@ export default async function TeamPage({ params }: { params: Promise<{ teamId: s
               deactivatedUntil={deactivatedUntil}
             />
           )}
-          {/* Edit button */}
           {canEdit && (
             <Link
               href={`/teams/${teamId}/edit`}
@@ -73,13 +64,13 @@ export default async function TeamPage({ params }: { params: Promise<{ teamId: s
         </div>
       </div>
 
-      {/* Deactivated banner */}
+      {/* Deactivated banner — nur für Manager sichtbar */}
       {!active && isManager && (
         <div className="flex items-center gap-3 px-4 py-3 mb-6 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-sm">
-          <span className="font-medium">Dieser Onepager ist deaktiviert</span>
+          <span className="font-medium">Onepager deaktiviert</span>
           {deactivatedUntil && (
             <span className="text-xs opacity-80">
-              · reaktiviert automatisch am {new Date(deactivatedUntil).toLocaleDateString("de-CH")}
+              · reaktiviert am {new Date(deactivatedUntil).toLocaleDateString("de-CH")}
             </span>
           )}
           <span className="ml-auto text-xs opacity-70">Lernende sehen diesen Onepager nicht.</span>
@@ -117,7 +108,7 @@ export default async function TeamPage({ params }: { params: Promise<{ teamId: s
         )}
       </div>
 
-      {/* Onepager content */}
+      {/* Content */}
       <div className="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-10">
         {team.onepager.split("\n\n").map((paragraph, i) => (
           <p key={i} className="text-[var(--color-foreground)] leading-relaxed mb-4 last:mb-0 whitespace-pre-line">
@@ -142,8 +133,8 @@ export default async function TeamPage({ params }: { params: Promise<{ teamId: s
         )}
       </div>
 
-      {/* Bewerben — nur für Lernende */}
-      {isLernender && (
+      {/* Bewerben — nur für Lernende, nur wenn aktiv */}
+      {canApply && active && (
         <div className="flex flex-col sm:flex-row gap-3">
           <a
             href={mailtoLink}

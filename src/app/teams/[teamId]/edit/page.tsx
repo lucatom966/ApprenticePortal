@@ -28,11 +28,13 @@ export default function EditTeamPage() {
     const found = initialTeams.find((t) => t.id === teamId);
     if (!found) { router.push("/teams"); return; }
 
+    // Access: Praxisbildner only edits own team; GBV/Admin edit all
     const role = session?.user?.role;
-    if (role === "praxisbildner" && session?.user?.teamId !== teamId) {
-      router.push("/unauthorized");
-      return;
-    }
+    const canEdit =
+      role === "admin" ||
+      role === "gbv" ||
+      (role === "praxisbildner" && session?.user?.teamId === teamId);
+    if (!canEdit) { router.push(`/teams/${teamId}`); return; }
 
     setTeam(found);
     setOnepager(found.onepager);
