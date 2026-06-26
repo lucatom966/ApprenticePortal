@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Team } from "@/types";
 import { cn } from "@/lib/utils";
+import { SpecialtyBadge } from "@/components/ui/specialty-badge";
 
 export function TeamCard({ team }: { team: Team }) {
   return (
@@ -32,16 +33,28 @@ export function TeamCard({ team }: { team: Team }) {
         {team.description}
       </p>
 
-      <div className="flex flex-wrap gap-1.5">
-        {team.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-xs px-2 py-0.5 rounded-md bg-[var(--color-muted)] text-[var(--color-muted-foreground)]"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+      {/* Fachrichtungen */}
+      {team.suitableFor.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {team.suitableFor.map((s) => (
+            <SpecialtyBadge key={s} specialty={s} size="sm" />
+          ))}
+        </div>
+      )}
+
+      {/* Tech tags */}
+      {team.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {team.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-xs px-2 py-0.5 rounded-md bg-[var(--color-muted)] text-[var(--color-muted-foreground)]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
 
       <div className="flex items-center justify-between mt-auto pt-3 border-t border-[var(--color-border)]">
         <span className="text-xs text-[var(--color-muted-foreground)]">{team.trainerName}</span>

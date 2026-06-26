@@ -11,6 +11,7 @@ export const teams: Team[] = [
     description: "Entwicklung und Wartung interner Web-Applikationen und APIs.",
     onepager: `Willkommen im Software Development Team! Wir entwickeln moderne Web-Applikationen und APIs für den Kanton. Bei uns lernst du den gesamten Software-Lifecycle kennen – von der Anforderungsanalyse über das Design bis hin zur Implementierung und dem Deployment.\n\nDu arbeitest mit modernen Technologien wie TypeScript, React und Node.js. Wir legen grossen Wert auf Clean Code, Code Reviews und kontinuierliches Lernen.\n\nWas dich erwartet:\n- Aktive Mitarbeit an echten Projekten\n- Pair Programming mit erfahrenen Entwicklern\n- Agiles Arbeiten mit zwei-Wochen Sprints\n- Regelmässige Tech Talks und Weiterbildungen`,
     tags: ["TypeScript", "React", "Node.js", "APIs"],
+    suitableFor: ["Applikationsentwicklung", "EDB"],
     openSlots: 2,
   },
   {
@@ -23,6 +24,7 @@ export const teams: Team[] = [
     description: "Betrieb und Ausbau der kantonalen IT-Infrastruktur.",
     onepager: `Das Infrastruktur & Cloud Team sorgt dafür, dass alle IT-Systeme des Kantons zuverlässig laufen. Wir betreiben Server, Netzwerke und Cloud-Dienste auf höchstem Niveau.\n\nBei uns lernst du die Grundlagen des Systembetriebs und tauschst in die Welt der Cloud-Technologien ein. Ob Linux, Windows Server, Azure oder Netzwerkkonfiguration – du bekommst einen umfassenden Einblick.\n\nWas dich erwartet:\n- Einblick in Enterprise-Infrastruktur\n- Hands-on mit Cloud-Plattformen (Azure)\n- Monitoring und Alerting\n- Backup und Disaster Recovery`,
     tags: ["Linux", "Azure", "Networking", "DevOps"],
+    suitableFor: ["Plattformentwicklung"],
     openSlots: 1,
   },
   {
@@ -35,6 +37,7 @@ export const teams: Team[] = [
     description: "Sicherstellung der IT-Sicherheit und des Datenschutzes.",
     onepager: `Im Datenschutz & Security Team schützen wir die digitalen Assets des Kantons. Wir analysieren Risiken, implementieren Sicherheitsmassnahmen und sensibilisieren Mitarbeitende für IT-Sicherheit.\n\nDu lernst die Grundlagen der Cybersecurity, DSGVO/DSG-konforme Prozesse und arbeitest an echten Security-Assessments mit.\n\nWas dich erwartet:\n- Security Audits und Penetration Testing Grundlagen\n- Datenschutz-Management\n- Incident Response\n- Security Awareness Trainings`,
     tags: ["Security", "DSGVO", "Risk Management"],
+    suitableFor: ["Plattformentwicklung", "Applikationsentwicklung"],
     openSlots: 1,
   },
   {
@@ -47,6 +50,7 @@ export const teams: Team[] = [
     description: "Planung und Steuerung von IT-Projekten im Kanton.",
     onepager: `Das Projektmanagement Team koordiniert grosse IT-Vorhaben im Kanton. Wir arbeiten nach modernen PM-Methoden (HERMES, Scrum) und sorgen dafür, dass Projekte on-time und on-budget abgeliefert werden.\n\nBei uns lernst du, wie komplexe Projekte strukturiert und gesteuert werden. Du begleitest Projekte von der Initialisierung bis zum Abschluss und übernimmst eigene Verantwortlichkeiten.\n\nWas dich erwartet:\n- Einblick in HERMES und agile Methoden\n- Stakeholder Management\n- Projektcontrolling und Reporting\n- Workshops moderieren`,
     tags: ["HERMES", "Scrum", "Stakeholder", "Controlling"],
+    suitableFor: ["EDB", "Applikationsentwicklung", "Plattformentwicklung"],
     openSlots: 2,
   },
   {
@@ -59,6 +63,7 @@ export const teams: Team[] = [
     description: "Datenanalyse und Business Intelligence für den Kanton.",
     onepager: `Im Data & Analytics Team verwandeln wir Rohdaten in wertvolle Erkenntnisse. Wir bauen Dashboards, Datenmodelle und automatisierte Reports für die kantonale Verwaltung.\n\nDu lernst den Umgang mit modernen BI-Tools, SQL, Python und Datenvisualisierung. Statistische Grundkenntnisse werden bei uns zur Routine.\n\nWas dich erwartet:\n- Power BI und Tableau Dashboards\n- SQL und Datenbankmodellierung\n- Python für Datenanalyse\n- Zusammenarbeit mit Fachabteilungen`,
     tags: ["SQL", "Python", "Power BI", "Analytics"],
+    suitableFor: ["EDB", "Applikationsentwicklung"],
     openSlots: 1,
   },
   {
@@ -71,6 +76,7 @@ export const teams: Team[] = [
     description: "1st und 2nd Level Support für kantonale Mitarbeitende.",
     onepager: `Das IT Support Team ist die erste Anlaufstelle für alle IT-Probleme im Kanton. Wir helfen Mitarbeitenden schnell und kompetent bei technischen Anliegen.\n\nDu lernst, wie professioneller IT-Support funktioniert, entwickelst deine Kommunikationsfähigkeiten und gewinnst einen breiten Überblick über verschiedene IT-Systeme.\n\nWas dich erwartet:\n- Ticketsystem und ITIL-Prozesse\n- Hard- und Software Support\n- Kundenkommunikation\n- Eskalationsprozesse`,
     tags: ["ITIL", "Helpdesk", "Windows", "Support"],
+    suitableFor: ["Plattformentwicklung", "EDB"],
     openSlots: 3,
   },
 ];

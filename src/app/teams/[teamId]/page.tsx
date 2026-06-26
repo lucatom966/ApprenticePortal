@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Mail, User, Pencil } from "lucide-react";
 import { teams } from "@/lib/mock-data";
 import { auth } from "@/auth";
+import { SpecialtyBadge } from "@/components/ui/specialty-badge";
 
 export function generateStaticParams() {
   return teams.map((team) => ({ teamId: team.id }));
@@ -45,18 +46,36 @@ export default async function TeamPage({ params }: { params: Promise<{ teamId: s
         )}
       </div>
 
-      <div className="mb-10">
+      <div className="mb-8">
         <p className="text-xs font-medium text-[var(--color-accent)] uppercase tracking-wider mb-2">
           {team.department}
         </p>
         <h1 className="text-3xl font-bold text-[var(--color-foreground)] tracking-tight mb-4">{team.name}</h1>
-        <div className="flex flex-wrap gap-1.5">
-          {team.tags.map((tag) => (
-            <span key={tag} className="text-xs px-2.5 py-1 rounded-md bg-[var(--color-muted)] text-[var(--color-muted-foreground)]">
-              {tag}
-            </span>
-          ))}
-        </div>
+
+        {/* Fachrichtungen — prominent */}
+        {team.suitableFor.length > 0 && (
+          <div className="mb-4">
+            <p className="text-xs font-medium text-[var(--color-muted-foreground)] mb-2 uppercase tracking-wide">
+              Geeignet für
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {team.suitableFor.map((s) => (
+                <SpecialtyBadge key={s} specialty={s} size="md" />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tech tags */}
+        {team.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {team.tags.map((tag) => (
+              <span key={tag} className="text-xs px-2.5 py-1 rounded-md bg-[var(--color-muted)] text-[var(--color-muted-foreground)]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] mb-10">
