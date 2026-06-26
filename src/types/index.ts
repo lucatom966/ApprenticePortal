@@ -25,6 +25,7 @@ export interface Team {
   tags: string[];
   suitableFor: Specialty[];
   openSlots: number;
+  active: boolean;
 }
 
 export interface Event {

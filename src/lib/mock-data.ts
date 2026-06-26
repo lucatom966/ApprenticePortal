@@ -13,6 +13,7 @@ export const teams: Team[] = [
     tags: ["TypeScript", "React", "Node.js", "APIs"],
     suitableFor: ["Applikationsentwicklung", "EDB"],
     openSlots: 2,
+    active: true,
   },
   {
     id: "infrastruktur",
@@ -26,6 +27,7 @@ export const teams: Team[] = [
     tags: ["Linux", "Azure", "Networking", "DevOps"],
     suitableFor: ["Plattformentwicklung"],
     openSlots: 1,
+    active: true,
   },
   {
     id: "datenschutz",
@@ -39,6 +41,7 @@ export const teams: Team[] = [
     tags: ["Security", "DSGVO", "Risk Management"],
     suitableFor: ["Plattformentwicklung", "Applikationsentwicklung"],
     openSlots: 1,
+    active: true,
   },
   {
     id: "projektmanagement",
@@ -52,6 +55,7 @@ export const teams: Team[] = [
     tags: ["HERMES", "Scrum", "Stakeholder", "Controlling"],
     suitableFor: ["EDB", "Applikationsentwicklung", "Plattformentwicklung"],
     openSlots: 2,
+    active: true,
   },
   {
     id: "data-analytics",
@@ -65,6 +69,7 @@ export const teams: Team[] = [
     tags: ["SQL", "Python", "Power BI", "Analytics"],
     suitableFor: ["EDB", "Applikationsentwicklung"],
     openSlots: 1,
+    active: true,
   },
   {
     id: "support",
@@ -78,6 +83,7 @@ export const teams: Team[] = [
     tags: ["ITIL", "Helpdesk", "Windows", "Support"],
     suitableFor: ["Plattformentwicklung", "EDB"],
     openSlots: 3,
+    active: true,
   },
 ];
 
