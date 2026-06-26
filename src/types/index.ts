@@ -1,4 +1,5 @@
 export type Role = "lernender" | "praxisbildner" | "gbv" | "admin";
+export type Specialty = "EDB" | "Plattformentwicklung" | "Applikationsentwicklung";
 
 export interface Team {
   id: string;

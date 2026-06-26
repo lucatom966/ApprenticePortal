@@ -37,7 +37,7 @@ export default function LoginPage() {
     if (res?.error) {
       setError("E-Mail oder Passwort ungültig.");
     } else {
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     }
   }

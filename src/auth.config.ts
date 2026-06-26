@@ -9,7 +9,7 @@ export const authConfig: NextAuthConfig = {
       const isLoggedIn = !!auth?.user;
       const isLoginPage = nextUrl.pathname === "/login";
 
-      if (isLoginPage) return isLoggedIn ? Response.redirect(new URL("/", nextUrl)) : true;
+      if (isLoginPage) return isLoggedIn ? Response.redirect(new URL("/dashboard", nextUrl)) : true;
       return isLoggedIn;
     },
   },
