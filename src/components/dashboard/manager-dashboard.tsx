@@ -29,12 +29,6 @@ export function ManagerDashboard({ user }: { user: Session["user"] }) {
   });
   const maxTotal = Math.max(...bySpecialty.map((s) => s.total), 1);
 
-  const byLehrjahr = [1, 2, 3, 4].map((j) => ({
-    j,
-    count: lernende.filter((u) => u.lehrjahr === j).length,
-  }));
-  const maxLj = Math.max(...byLehrjahr.map((l) => l.count), 1);
-
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 
@@ -106,28 +100,8 @@ export function ManagerDashboard({ user }: { user: Session["user"] }) {
           </div>
         </div>
 
-        {/* Lehrjahr + Quick links */}
+        {/* Quick links */}
         <div className="flex flex-col gap-4">
-          <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-5">
-            <h2 className="font-semibold text-[var(--color-foreground)] mb-4">Nach Lehrjahr</h2>
-            <div className="flex flex-col gap-3">
-              {byLehrjahr.map(({ j, count }) => (
-                <div key={j}>
-                  <div className="flex items-center justify-between mb-1 text-sm">
-                    <span className="text-[var(--color-foreground)]">{j}. Lehrjahr</span>
-                    <span className="font-semibold text-[var(--color-foreground)]">{count}</span>
-                  </div>
-                  <div className="h-1.5 rounded-full bg-[var(--color-muted)] overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-[var(--color-accent)]"
-                      style={{ width: `${(count / maxLj) * 100}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] p-5">
             <h2 className="font-semibold text-[var(--color-foreground)] mb-3">Verwaltung</h2>
             <div className="flex flex-col gap-1">
