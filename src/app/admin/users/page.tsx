@@ -155,18 +155,25 @@ export default function UsersPage() {
                   </span>
                 </td>
                 <td className="px-5 py-3.5">
-                  <span className={cn(
-                    "inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full border",
-                    user.active
-                      ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
-                      : "bg-[var(--color-muted)] text-[var(--color-muted-foreground)] border-[var(--color-border)]"
-                  )}>
-                    <span className={cn("w-1.5 h-1.5 rounded-full", user.active ? "bg-emerald-500" : "bg-[var(--color-muted-foreground)]")} />
-                    {user.active ? "Aktiv" : "Deaktiviert"}
-                  </span>
+                  {user.role === "lernender" ? (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full border bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      Aktiv
+                    </span>
+                  ) : (
+                    <span className={cn(
+                      "inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full border",
+                      user.active
+                        ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
+                        : "bg-[var(--color-muted)] text-[var(--color-muted-foreground)] border-[var(--color-border)]"
+                    )}>
+                      <span className={cn("w-1.5 h-1.5 rounded-full", user.active ? "bg-emerald-500" : "bg-[var(--color-muted-foreground)]")} />
+                      {user.active ? "Aktiv" : "Deaktiviert"}
+                    </span>
+                  )}
                 </td>
                 <td className="px-5 py-3.5">
-                  {user.deactivatedUntil ? (
+                  {user.role !== "lernender" && user.deactivatedUntil ? (
                     <span className="text-xs text-[var(--color-muted-foreground)]">
                       bis {new Date(user.deactivatedUntil).toLocaleDateString("de-CH")}
                     </span>
@@ -176,13 +183,15 @@ export default function UsersPage() {
                 </td>
                 <td className="px-5 py-3.5">
                   <div className="flex items-center gap-1">
-                    <ActionButton
-                      onClick={() => toggleActive(user.id)}
-                      title={user.active ? "Deaktivieren" : "Aktivieren"}
-                      className={user.active ? "hover:text-amber-500" : "hover:text-emerald-500"}
-                    >
-                      {user.active ? <PowerOff size={15} /> : <Power size={15} />}
-                    </ActionButton>
+                    {user.role !== "lernender" && (
+                      <ActionButton
+                        onClick={() => toggleActive(user.id)}
+                        title={user.active ? "Deaktivieren" : "Aktivieren"}
+                        className={user.active ? "hover:text-amber-500" : "hover:text-emerald-500"}
+                      >
+                        {user.active ? <PowerOff size={15} /> : <Power size={15} />}
+                      </ActionButton>
+                    )}
                     <ActionButton
                       onClick={() => setDeleteTarget(user)}
                       title="Löschen"
